@@ -1,13 +1,32 @@
-# Walkd.
+<p align="center">
+  <h1 align="center">*Walkd.</h1>
+</p>
 
-Walking app for the introverts.
+<p align="center">
+  <strong>Walking App for Introverts.</strong>
+</p>
 
-## Stay Introverted!
+---
 
-This is an app that keeps track of yourr steps using Pedometer. It encourages you in a hilarious ways, like stopping you to go outside for a walk. This app only works within the radius of your house.
+## Description
 
-Features:
-- Level-Up system
-- Runs tracker
-- Introverted
+Walkd is a Flutter app designed to [move the introvert within you] to be healthy.  
+It allows you to be healthy while still inside the comfort of your house!.  
 
+**Key Features:**
+- 📊 Personal Summaries: You can see the stats of your average steps and distance
+- 🏆 Levelling System: You can level up your account with each runs
+- 🏠 Introverted: It encourages you to stay inside
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/main/screenshot1.png" width="200" alt="Screenshot 1"/>
+  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/main/screenshot1.png" width="200" alt="Screenshot 1"/>
+</p>
+
+---
+
+## Installation
