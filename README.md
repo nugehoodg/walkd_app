@@ -23,8 +23,8 @@ It allows you to be healthy while still inside the comfort of your house!.
 ## Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/main/screenshot1.png" width="200" alt="Screenshot 1"/>
-  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/main/screenshot1.png" width="200" alt="Screenshot 1"/>
+  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/screenshots/ss_01.png" width="200" alt="Screenshot 1"/>
+  <img src="https://raw.githubusercontent.com/nugehoodg/walkd_app/screenshots/screenshot1.png" width="200" alt="Screenshot 1"/>
 </p>
 
 ---
