@@ -130,14 +130,27 @@ class _NewRunPageState extends State<NewRunPage>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: widget.isRunning ? null : widget.startRun,
-                  child: const Text("Start Run"),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: widget.isRunning ? widget.stopRun : null,
-                  child: const Text("Stop Run"),
+                GestureDetector(
+                  onTap: widget.isRunning ? widget.stopRun : widget.startRun,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: widget.isRunning ? 75 : 70,
+                    height: widget.isRunning ? 75 : 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: widget.isRunning ? Colors.red : Colors.black,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: Icon(
+                        widget.isRunning ? Icons.stop : Icons.play_arrow,
+                        key: ValueKey(widget.isRunning),
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

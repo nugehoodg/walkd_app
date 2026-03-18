@@ -17,6 +17,7 @@ import 'account_page.dart';
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'user_progress.dart';
+import 'package:http/http.dart' as http;
 
 Future<void> requestPermission() async {
   await Permission.activityRecognition.request();
@@ -407,8 +408,30 @@ class _NavigationExampleState extends State<NavigationExample> {
         });
   }
 
+  String getStepFunFact(int steps, double distanceKm) {
+    if (distanceKm < 0.2) {
+      return "That's about walking across a large building 🏢";
+    } else if (distanceKm < 0.5) {
+      return "That's like walking around a park 🌳";
+    } else if (distanceKm < 1) {
+      return "That's roughly 12 football fields ⚽";
+    } else if (distanceKm < 2) {
+      return "That's like walking around Hogwarts castle 🏰";
+    } else if (distanceKm < 5) {
+      return "That's like exploring a theme park 🎢";
+    } else if (distanceKm < 10) {
+      return "That's like crossing a small city 🏙️";
+    } else if (distanceKm < 20) {
+      return "That's half a marathon! 🏃‍♂️🔥";
+    } else {
+      return "That's basically a marathon level run! 🏅";
+    }
+  }
+
   Future<void> stopRun() async {
     positionStream?.cancel();
+    double distance = calculateDistance(runSteps);
+    String funFact = getStepFunFact(runSteps, distance);
 
     setState(() {
       isRunning = false;
@@ -423,6 +446,24 @@ class _NavigationExampleState extends State<NavigationExample> {
         "distance": distance,
         "date": DateTime.now().toString(),
       });
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text("Good job! 🎉"),
+          content: Text(
+            "You ran $runSteps steps!\n"
+            "≈ ${distance.toStringAsFixed(2)} km\n\n"
+            "🏃 $funFact",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Nice!"),
+            ),
+          ],
+        ),
+      );
 
       await saveRuns();
       await addExp(runSteps, distance);

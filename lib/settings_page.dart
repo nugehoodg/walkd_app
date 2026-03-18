@@ -57,6 +57,7 @@ class SettingsPage extends StatelessWidget {
             },
             child: Text("Reset User Data"),
           ),
+          Text("v.1.1.0", style: TextStyle(color: Colors.grey)),
         ],
       ),
     );
