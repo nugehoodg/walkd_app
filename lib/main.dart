@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:ui'; // for lerpDouble
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +20,7 @@ import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'user_progress.dart';
 import 'package:http/http.dart' as http;
+import 'package:confetti/confetti.dart';
 
 Future<void> requestPermission() async {
   await Permission.activityRecognition.request();
@@ -250,6 +253,7 @@ class AccountCard extends StatelessWidget {
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
+  late ConfettiController _confettiController;
   int level = 1;
   int exp = 0;
   int expNeeded = 0;
@@ -269,10 +273,12 @@ class _NavigationExampleState extends State<NavigationExample> {
   @override
   void initState() {
     super.initState();
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 2),
+    );
     loadUsername();
     loadRuns();
     loadLevel();
-
     if (!kIsWeb) {
       requestPermission();
 
@@ -286,6 +292,13 @@ class _NavigationExampleState extends State<NavigationExample> {
         });
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    positionStream?.cancel();
+    super.dispose();
   }
 
   int expToNextLevel(int level) {
@@ -438,8 +451,8 @@ class _NavigationExampleState extends State<NavigationExample> {
     });
 
     if (runSteps > 0) {
+      _confettiController.play();
       double distance = calculateDistance(runSteps);
-
       items.add({
         "title": "Run ${items.length + 1}",
         "steps": runSteps,
@@ -538,7 +551,23 @@ class _NavigationExampleState extends State<NavigationExample> {
     ];
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: pages[currentIndex],
+      body: Stack(
+        children: [
+          pages[currentIndex],
+
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: _confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              emissionFrequency: 0.05,
+              numberOfParticles: 25,
+              gravity: 0.2,
+            ),
+          ),
+        ],
+      ),
 
       appBar: AppBar(
         actionsPadding: EdgeInsets.all(15),
